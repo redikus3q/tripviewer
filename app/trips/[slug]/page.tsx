@@ -205,27 +205,6 @@ function FlightSection(props: { trip: Trip }) {
 	);
 }
 
-function ScheduleSection(props: { trip: Trip }) {
-	return (
-		<>
-			<h2 className="text-lg lg:text-2xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">
-				Program pe zile
-			</h2>
-
-			<div>
-				{props.trip.itinerariuZile?.map((day, index) => (
-					<div key={index} className="mb-6">
-						<h3 className="text-base lg:text-xl font-medium text-gray-800">
-							Ziua {index + 1}: {day.titlu}
-						</h3>
-						<p>{day.activitati}</p>
-					</div>
-				))}
-			</div>
-		</>
-	);
-}
-
 const fetchImageUrl = async (id: string, payload: BasePayload) => {
 	if (!id) return null;
 
@@ -324,6 +303,29 @@ function TourGuideSection(props: { trip: Trip }) {
 				</div>
 			</div>
 		</div>
+	);
+}
+
+function ScheduleSection(props: { trip: Trip }) {
+	return (
+		<>
+			<h2 className="text-lg lg:text-2xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">
+				Program pe zile
+			</h2>
+
+			<div>
+				{props.trip.itinerariuZile?.map((day, index) => (
+					<div key={index} className="mb-6">
+						<h3 className="text-base lg:text-xl font-medium text-gray-800">
+							<strong>
+								Ziua {index + 1}: {day.titlu}
+							</strong>
+						</h3>
+						<div className="whitespace-pre-line">{day.activitati}</div>
+					</div>
+				))}
+			</div>
+		</>
 	);
 }
 

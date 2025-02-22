@@ -39,10 +39,7 @@ const ReadOnlyRichText = (props: { value: any }) => {
 				);
 			case "ul":
 				return (
-					<ul
-						className="max-w-md space-y-1 list-disc list-inside"
-						{...attributes}
-					>
+					<ul className="space-y-1 list-disc list-inside" {...attributes}>
 						{children}
 					</ul>
 				);
