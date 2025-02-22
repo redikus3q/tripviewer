@@ -327,7 +327,11 @@ function TourGuideSection(props: { trip: Trip }) {
 	);
 }
 
-export default async function Home({ params }: { params: { slug: string } }) {
+export default async function Home({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}) {
 	const payload = await getPayload({ config });
 	const parameters = await params;
 
