@@ -11,7 +11,6 @@ import {
 	Plane,
 } from "lucide-react";
 import moment from "moment";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BasePayload, getPayload } from "payload";
@@ -247,7 +246,11 @@ const fetchImageUrl = async (id: string, payload: BasePayload) => {
 };
 
 // Function to replace all upload IDs with their respective URLs
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const replaceUploadIdsWithUrls = async (value: any, payload: BasePayload) => {
+	if (value == undefined || value == null) {
+		return "";
+	}
 	const updatedValue = [];
 
 	// Iterate through the value and replace upload IDs with URLs
@@ -270,6 +273,7 @@ const replaceUploadIdsWithUrls = async (value: any, payload: BasePayload) => {
 	return updatedValue;
 };
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 function AdditionalInformationSection(props: { informatiiSuplimentare: any }) {
 	return (
 		<div className="mb-8">

@@ -5,11 +5,13 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createEditor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const ReadOnlyRichText = (props: { value: any }) => {
 	const editor = useMemo(() => withReact(createEditor()), []);
 	// const value = await replaceUploadIdsWithUrls(props.value, props.payload);
 
 	// Render block-level elements (e.g., paragraphs, headings)
+	/* eslint-disable  @typescript-eslint/no-explicit-any */
 	const renderElement = useCallback((props: any) => {
 		const { attributes, children, element } = props;
 		switch (element.type) {
@@ -75,6 +77,7 @@ const ReadOnlyRichText = (props: { value: any }) => {
 	}, []);
 
 	// Render inline text formatting (e.g., bold, italic, underline)
+	/* eslint-disable  @typescript-eslint/no-explicit-any */
 	const renderLeaf = useCallback((props: any) => {
 		const { attributes, children, leaf } = props;
 		let el = children;
