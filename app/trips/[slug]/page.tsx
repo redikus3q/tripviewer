@@ -347,7 +347,15 @@ export default async function Home({
 		depth: 2,
 	});
 
-	if (!trip) return notFound();
+	if (!trip) {
+		return (
+			<div className="mb-4 flex items-center">
+				<span className="text-base text-gray-700">
+					<strong>Could not find trip.</strong>
+				</span>
+			</div>
+		);
+	}
 
 	const informatiiSuplimentareRaw =
 		trip.informatiiSuplimentareExcursie?.informatii;
