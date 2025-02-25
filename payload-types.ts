@@ -162,7 +162,8 @@ export interface Trip {
    */
   slug: string;
   imagine: number | Media;
-  zborDePlecare: {
+  areZboruri?: boolean | null;
+  zborDePlecare?: {
     orasPlecare: string;
     orasSosire: string;
     areEscala?: boolean | null;
@@ -187,7 +188,7 @@ export interface Trip {
       dataSosire: string;
     };
   };
-  zborDeIntoarcere: {
+  zborDeIntoarcere?: {
     orasPlecare: string;
     orasSosire: string;
     areEscala?: boolean | null;
@@ -336,6 +337,7 @@ export interface TripsSelect<T extends boolean = true> {
   titlu?: T;
   slug?: T;
   imagine?: T;
+  areZboruri?: T;
   zborDePlecare?:
     | T
     | {

@@ -24,10 +24,58 @@ function formatDateTime(dateString: string, format = "DD-MM-YYYY HH:mm") {
 	return moment.utc(dateString).tz("Europe/Bucharest").format(format);
 }
 
+function NavBar() {
+	return (
+		<div className="navbar bg-base-90/80 backdrop-blur-sm shadow-lg w-full inset-ring-blue-500 flex flex-col items-center justify-items-center">
+			<div className="navbar-start"></div>
+			<div className="navbar-center m-2">
+				<Image
+					src="/logo.png"
+					alt="Sigla Nordic Tours"
+					width={120}
+					height={38}
+				/>
+			</div>
+			<div className="navbar-end"></div>
+		</div>
+	);
+}
+
+function TitleSection(props: { image: Media }) {
+	return (
+		<div className="flex w-full items-center justify-between mb-6">
+			<div>
+				<h1 className="text-xl lg:text-3xl font-extrabold text-gray-800">
+					Circuit Premium Nordic
+				</h1>
+				<p className="text-gray-700 text-base lg:text-lg">
+					Descoperiți Scandinavia alături de Nordic Tours.
+				</p>
+				<p className="text-gray-500 text-sm lg:text-base">
+					Detalii pentru a asigura o experiență de călătorie de neuitat.
+				</p>
+			</div>
+			<Image
+				src={props.image.url!}
+				alt={props.image.alt!}
+				width={120}
+				height={38}
+				className="rounded-xl shadow-lg w-28 h-28 object-cover border-2 border-gray-400"
+			/>
+		</div>
+	);
+}
+
 function FlightInformation(props: {
 	flight: Trip["zborDePlecare"] | Trip["zborDeIntoarcere"];
 }) {
 	const flight = props.flight;
+
+	// Should never happen because of the areZboruri check below
+	if (flight == undefined) {
+		return <></>;
+	}
+
 	return (
 		<div className="">
 			<h2 className="text-xl font-semibold mb-2">
@@ -131,49 +179,15 @@ function FlightInformation(props: {
 	);
 }
 
-function NavBar() {
-	return (
-		<div className="navbar bg-base-90/80 backdrop-blur-sm shadow-lg w-full inset-ring-blue-500 flex flex-col items-center justify-items-center">
-			<div className="navbar-start"></div>
-			<div className="navbar-center m-2">
-				<Image
-					src="/logo.png"
-					alt="Sigla Nordic Tours"
-					width={120}
-					height={38}
-				/>
-			</div>
-			<div className="navbar-end"></div>
-		</div>
-	);
-}
-
-function TitleSection(props: { image: Media }) {
-	return (
-		<div className="flex w-full items-center justify-between mb-6">
-			<div>
-				<h1 className="text-xl lg:text-3xl font-extrabold text-gray-800">
-					Circuit Premium Nordic
-				</h1>
-				<p className="text-gray-700 text-base lg:text-lg">
-					Descoperiți Scandinavia alături de Nordic Tours.
-				</p>
-				<p className="text-gray-500 text-sm lg:text-base">
-					Detalii pentru a asigura o experiență de călătorie de neuitat.
-				</p>
-			</div>
-			<Image
-				src={props.image.url!}
-				alt={props.image.alt!}
-				width={120}
-				height={38}
-				className="rounded-xl shadow-lg w-28 h-28 object-cover border-2 border-gray-400"
-			/>
-		</div>
-	);
-}
-
 function FlightSection(props: { trip: Trip }) {
+	// Should never happen because of the areZboruri check below
+	if (
+		props.trip.zborDePlecare == undefined ||
+		props.trip.zborDeIntoarcere == undefined
+	) {
+		return <></>;
+	}
+
 	return (
 		<>
 			<h2 className="text-lg lg:text-2xl font-semibold text-gray-800 mt-10 mb-6 border-b-2 border-blue-200 pb-2">
@@ -331,9 +345,7 @@ export default async function Home({
 	const payload = await getPayload({ config });
 	const parameters = await params;
 
-	const {
-		docs: [trip],
-	} = await payload.find({
+	const { docs: trips } = await payload.find({
 		collection: "trips",
 		where: {
 			slug: {
@@ -343,15 +355,36 @@ export default async function Home({
 		depth: 2,
 	});
 
-	if (!trip) {
+	if (!trips || trips.length == 0) {
 		return (
-			<div className="mb-4 flex items-center">
+			<div className="mb-4 flex items-center w-full h-full">
 				<span className="text-base text-gray-700">
-					<strong>Could not find trip.</strong>
+					<strong>
+						Nu am putut gasi trip-ul cu slug-ul "{parameters.slug}".
+					</strong>
 				</span>
 			</div>
 		);
 	}
+
+	if (trips.length > 1) {
+		return (
+			<div className="mb-4 flex items-center">
+				<span className="text-base text-gray-700">
+					<strong>
+						Am gasit mai multe tripuri cu acelasi slug:
+						<ol>
+							{trips.map((trip) => (
+								<li>{trip.titlu}</li>
+							))}
+						</ol>
+					</strong>
+				</span>
+			</div>
+		);
+	}
+
+	const trip = trips[0];
 
 	const informatiiSuplimentareRaw =
 		trip.informatiiSuplimentareExcursie?.informatii;
@@ -374,7 +407,7 @@ export default async function Home({
 								{trip.titlu}
 							</h1>
 
-							<FlightSection trip={trip} />
+							{trip.areZboruri && <FlightSection trip={trip} />}
 
 							<AdditionalInformationSection
 								informatiiSuplimentare={informatiiSuplimentare}

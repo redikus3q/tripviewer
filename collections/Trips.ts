@@ -58,6 +58,9 @@ const zbor: Omit<GroupField, "name"> = {
 
 const zboruri: Omit<GroupField, "name"> = {
 	type: "group",
+	admin: {
+		condition: (_, siblingData) => Boolean(siblingData?.areZboruri),
+	},
 	fields: [
 		{
 			type: "row",
@@ -193,6 +196,16 @@ export const Trips: CollectionConfig = {
 			type: "upload",
 			relationTo: "media",
 			required: true,
+		},
+		{
+			name: "areZboruri",
+			type: "checkbox",
+			label: "Are zboruri?",
+			admin: {
+				width: "30%",
+				style: { marginTop: "2.8em" },
+			},
+			defaultValue: true,
 		},
 		{
 			name: "zborDePlecare",
