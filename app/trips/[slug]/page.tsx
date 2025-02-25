@@ -360,12 +360,14 @@ export default async function Home({
 			<div className="mb-4 flex items-center w-full h-full">
 				<span className="text-base text-gray-700">
 					<strong>
-						Nu am putut gasi trip-ul cu slug-ul "{parameters.slug}".
+						Nu am putut gasi trip-ul cu slug-ul: {parameters.slug}.
 					</strong>
 				</span>
 			</div>
 		);
 	}
+
+	trips.push(trips[0]);
 
 	if (trips.length > 1) {
 		return (
@@ -374,8 +376,8 @@ export default async function Home({
 					<strong>
 						Am gasit mai multe tripuri cu acelasi slug:
 						<ol>
-							{trips.map((trip) => (
-								<li>{trip.titlu}</li>
+							{trips.map((trip, index) => (
+								<li key={index}>{trip.titlu}</li>
 							))}
 						</ol>
 					</strong>
