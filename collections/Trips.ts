@@ -1,6 +1,6 @@
-import config from "@payload-config";
 import type { CollectionConfig, GroupField } from "payload";
-import { getPayload } from "payload";
+
+const HOST_ADDRESS = "https://tripviewer.vercel.app";
 
 const zbor: Omit<GroupField, "name"> = {
 	type: "group",
@@ -185,8 +185,7 @@ export const Trips: CollectionConfig = {
 			required: true,
 			unique: true,
 			admin: {
-				description:
-					"Slug-ul este un identificator unic folosit în URL pentru a genera linkul final, format din litere, cifre și cratime. Exemplu: www.nordic.ro/trips/aurore - aurore e slug.",
+				description: `Slug-ul este un identificator unic folosit în URL pentru a genera linkul final. Exemplu: ${HOST_ADDRESS}/trips/aurore, unde aurore e slug-ul.`,
 			},
 		},
 		{

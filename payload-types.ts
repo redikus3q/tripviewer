@@ -158,7 +158,7 @@ export interface Trip {
   id: number;
   titlu: string;
   /**
-   * Slug-ul este un identificator unic folosit în URL pentru a genera linkul final, format din litere, cifre și cratime. Exemplu: www.nordic.ro/trips/aurore - aurore e slug.
+   * Slug-ul este un identificator unic folosit în URL pentru a genera linkul final. Exemplu: https://tripviewer.vercel.app/trips/aurore, unde aurore e slug-ul.
    */
   slug: string;
   imagine: number | Media;

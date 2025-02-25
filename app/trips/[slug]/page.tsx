@@ -153,13 +153,13 @@ function TitleSection(props: { image: Media }) {
 		<div className="flex w-full items-center justify-between mb-6">
 			<div>
 				<h1 className="text-xl lg:text-3xl font-extrabold text-gray-800">
-					Excursia dumneavoastră
+					Circuit Premium Nordic
 				</h1>
 				<p className="text-gray-700 text-base lg:text-lg">
-					O privire de ansamblu asupra călătoriei tale viitoare.
+					Descoperiți Scandinavia alături de Nordic Tours.
 				</p>
 				<p className="text-gray-500 text-sm lg:text-base">
-					Detalii pentru a asigura o experiență de călătorie fără probleme.
+					Detalii pentru a asigura o experiență de călătorie de neuitat.
 				</p>
 			</div>
 			<Image
