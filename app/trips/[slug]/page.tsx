@@ -10,20 +10,18 @@ import {
 	Phone,
 	Plane,
 } from "lucide-react";
-import moment from "moment";
+import moment from "moment-timezone";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BasePayload, getPayload } from "payload";
 import ReadOnlyRichText from "../../rtl_parser";
 
-// const NoSSR = dynamic(() => import("../../components/no-ssr"), { ssr: false });
-
 function formatDate(dateString: string, format = "DD-MM-YYYY") {
-	return moment(dateString).format(format);
+	return moment.utc(dateString).tz("Europe/Bucharest").format(format);
 }
 
 function formatDateTime(dateString: string, format = "DD-MM-YYYY HH:mm") {
-	return moment.utc(dateString).format(format);
+	return moment.utc(dateString).tz("Europe/Bucharest").format(format);
 }
 
 function FlightInformation(props: {
@@ -176,7 +174,6 @@ function TitleSection(props: { image: Media }) {
 }
 
 function FlightSection(props: { trip: Trip }) {
-	console.log(props.trip.zborDePlecare);
 	return (
 		<>
 			<h2 className="text-lg lg:text-2xl font-semibold text-gray-800 mt-10 mb-6 border-b-2 border-blue-200 pb-2">
