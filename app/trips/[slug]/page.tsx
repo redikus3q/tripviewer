@@ -23,7 +23,7 @@ function formatDate(dateString: string, format = "DD-MM-YYYY") {
 }
 
 function formatDateTime(dateString: string, format = "DD-MM-YYYY HH:mm") {
-	return moment(dateString).format(format);
+	return moment.utc(dateString).format(format);
 }
 
 function FlightInformation(props: {
@@ -68,7 +68,6 @@ function FlightInformation(props: {
 				<div className="w-8 flex items-center">
 					<EllipsisVertical className="text-blue-600 mr-3" />
 				</div>
-				<span className="text-sm text-gray-700">3 ore</span>
 			</div>
 
 			<div className="mb-4 flex items-center border-b pb-4 last:pb-0">
@@ -117,7 +116,6 @@ function FlightInformation(props: {
 						<div className="w-8 flex items-center">
 							<EllipsisVertical className="text-blue-600 mr-3" />
 						</div>
-						<span className="text-sm text-gray-700">3 ore</span>
 					</div>
 
 					<div className="mb-4 flex items-center">
@@ -178,6 +176,7 @@ function TitleSection(props: { image: Media }) {
 }
 
 function FlightSection(props: { trip: Trip }) {
+	console.log(props.trip.zborDePlecare);
 	return (
 		<>
 			<h2 className="text-lg lg:text-2xl font-semibold text-gray-800 mt-10 mb-6 border-b-2 border-blue-200 pb-2">
@@ -317,9 +316,7 @@ function ScheduleSection(props: { trip: Trip }) {
 				{props.trip.itinerariuZile?.map((day, index) => (
 					<div key={index} className="mb-6">
 						<h3 className="text-base lg:text-xl font-medium text-gray-800">
-							<strong>
-								Ziua {index + 1}: {day.titlu}
-							</strong>
+							<strong>{day.titlu}</strong>
 						</h3>
 						<div className="whitespace-pre-line">{day.activitati}</div>
 					</div>
