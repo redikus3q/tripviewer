@@ -367,8 +367,6 @@ export default async function Home({
 		);
 	}
 
-	trips.push(trips[0]);
-
 	if (trips.length > 1) {
 		return (
 			<div className="mb-4 flex items-center">
