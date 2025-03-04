@@ -472,7 +472,7 @@ export default async function Home({
 		return (
 			<div className="mb-4 flex items-center">
 				<span className="text-base text-gray-700">
-					<strong>Couldn't find the language: {trip.limba}</strong>
+					<strong>Could not find the language: {trip.limba}</strong>
 				</span>
 			</div>
 		);
