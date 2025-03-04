@@ -132,6 +132,9 @@ const zboruri: Omit<GroupField, "name"> = {
 const ghid: GroupField = {
 	name: "ghid",
 	type: "group",
+	admin: {
+		condition: (_, siblingData) => Boolean(siblingData?.areGhid),
+	},
 	fields: [
 		{
 			name: "nume",
@@ -198,6 +201,26 @@ export const Trips: CollectionConfig = {
 			required: true,
 		},
 		{
+			name: "companie",
+			type: "select",
+			options: [
+				{ label: "Nordic Tours", value: "nordic" },
+				{ label: "Romania Tours", value: "romania" },
+			],
+			required: true,
+			defaultValue: "nordic",
+		},
+		{
+			name: "limba",
+			type: "select",
+			options: [
+				{ label: "Romana", value: "ro" },
+				{ label: "Engleza", value: "en" },
+			],
+			required: true,
+			defaultValue: "ro",
+		},
+		{
 			name: "areZboruri",
 			type: "checkbox",
 			label: "Are zboruri?",
@@ -214,6 +237,16 @@ export const Trips: CollectionConfig = {
 		{
 			name: "zborDeIntoarcere",
 			...zboruri,
+		},
+		{
+			name: "areGhid",
+			type: "checkbox",
+			label: "Are ghid?",
+			admin: {
+				width: "30%",
+				style: { marginTop: "2.8em" },
+			},
+			defaultValue: true,
 		},
 		ghid,
 		informatiiSuplimentareExcursie,

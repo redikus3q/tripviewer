@@ -162,6 +162,8 @@ export interface Trip {
    */
   slug: string;
   imagine: number | Media;
+  companie: 'nordic' | 'romania';
+  limba: 'ro' | 'en';
   areZboruri?: boolean | null;
   zborDePlecare?: {
     orasPlecare: string;
@@ -213,7 +215,8 @@ export interface Trip {
       dataSosire: string;
     };
   };
-  ghid: {
+  areGhid?: boolean | null;
+  ghid?: {
     nume: string;
     telefon: string;
     informatiiSuplimentare?: string | null;
@@ -337,6 +340,8 @@ export interface TripsSelect<T extends boolean = true> {
   titlu?: T;
   slug?: T;
   imagine?: T;
+  companie?: T;
+  limba?: T;
   areZboruri?: T;
   zborDePlecare?:
     | T
@@ -404,6 +409,7 @@ export interface TripsSelect<T extends boolean = true> {
               dataSosire?: T;
             };
       };
+  areGhid?: T;
   ghid?:
     | T
     | {
