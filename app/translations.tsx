@@ -6,8 +6,8 @@ export const translations: Record<string, Translations> = {
 	ro: {
 		nordicPremiumTour: "Circuit Premium Nordic",
 		nordicDiscover: "Descoperiți Scandinavia alături de Nordic Tours.",
-		romaniaPremiumTour: "Circuit Premium Romania Tours",
-		romaniaDiscover: "Descoperiți lumea alături de Romania Tours.",
+		romaniaPremiumTour: "Circuit Premium",
+		romaniaDiscover: "Descoperiți lumea alături de noi.",
 		experienceDetails:
 			"Detalii pentru a asigura o experiență de călătorie de neuitat.",
 		flightDetails: "Detalii despre zbor",
@@ -28,8 +28,8 @@ export const translations: Record<string, Translations> = {
 	en: {
 		nordicPremiumTour: "Nordic Premium Tour",
 		nordicDiscover: "Discover Scandinavia with Nordic Tours.",
-		romaniaPremiumTour: "Romania Tours Premium Tour",
-		romaniaDiscover: "Discover the world with Romania Tours.",
+		romaniaPremiumTour: "Premium Tour",
+		romaniaDiscover: "Discovering the world step by step.",
 		experienceDetails: "Details to ensure an unforgettable travel experience.",
 		flightDetails: "Flight Details",
 		departureFlight: "Departure Flight",
